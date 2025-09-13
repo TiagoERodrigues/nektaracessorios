@@ -119,7 +119,7 @@
       // Aba "Todos"
       tabs.innerHTML += `
         <li class="nav-item">
-          <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-todos">Todos</button>
+          <button class="nav-link active" type="button" data-bs-toggle="tab" data-bs-target="#tab-todos">Todos</button>
         </li>
       `;
       content.innerHTML += `
@@ -133,7 +133,7 @@
         const tabId = "tab-" + marca.replace(/\s+/g, "-").toLowerCase();
         tabs.innerHTML += `
           <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#${tabId}">${marca}</button>
+            <button class="nav-link" type="button" data-bs-toggle="tab" data-bs-target="#${tabId}">${marca}</button>
           </li>
         `;
         content.innerHTML += `
@@ -185,7 +185,7 @@
                     <p class="card-text"><strong>Marca:</strong> ${p.Marca}</p>
                     <p class="card-text">${p.Tipo} ${p.ml} a partir de <strong>${p.Venda}</strong></p>
                     <span class="badge-opcoes">+ opções</span>
-                    <a href="https://wa.me/5537998195214?text=Olá!%20Tenho%20interesse%20no%20perfume%20${encodeURIComponent(p.Perfume)}." target="_blank" class="badge-what">Quero via WhatsApp</a>
+                    <a href="https://wa.me/5537998195214?text=Olá!%20Tenho%20interesse%20no%20perfume%20${encodeURIComponent(p.Marca)}%20${encodeURIComponent(p.Perfume)}." target="_blank" class="badge-what">Quero via WhatsApp</a>
                   </div>
                 </div>
               </div>
@@ -239,6 +239,18 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // ✅ Garante que abas funcionem com 1 clique
+    document.addEventListener("DOMContentLoaded", () => {
+      const triggerTabList = [].slice.call(document.querySelectorAll('#marcasTabs button'))
+      triggerTabList.forEach(triggerEl => {
+        const tabTrigger = new bootstrap.Tab(triggerEl)
+        triggerEl.addEventListener('click', event => {
+          event.preventDefault()
+          tabTrigger.show()
+        })
+      })
+    })
+  </script>
 </body>
-
 </html>
