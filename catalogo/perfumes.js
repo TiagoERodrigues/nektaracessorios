@@ -536,7 +536,7 @@ const perfumesBackup = [
     "ml": "30 ml",
     "Medio": "R$ 490,00",
     "Venda": "R$ 399,00",
-    "Genero": "MASC",
+    "Genero": "FEM",
     "Imagem": "https://firebasestorage.stagebeta.kyte.site/v0/b/kyte-7c484.appspot.com/o/hVtcg2MWe8Uy81uCzZTAxvvGiYv2%2Fthumb_280_F62565D0-B380-44F5-BFC7-5C3EB7DCEF5C.jpg?alt=media"
   },
   {
