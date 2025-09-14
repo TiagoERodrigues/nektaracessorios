@@ -130,7 +130,7 @@
 
       // Abas de marcas
       marcas.forEach(marca => {
-        const tabId = "tab-" + marca.replace(/\s+/g, "-").toLowerCase();
+        const tabId = "tab-" + marca.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         tabs.innerHTML += `
           <li class="nav-item">
             <button class="nav-link" type="button" data-bs-toggle="tab" data-bs-target="#${tabId}">${marca}</button>
@@ -163,7 +163,7 @@
 
       // Renderiza por marca
       [...new Set(lista.map(p => p.Marca))].forEach(marca => {
-        const tabId = "tab-" + marca.replace(/\s+/g, "-").toLowerCase();
+        const tabId = "tab-" + marca.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         const containerMarca = document.getElementById("catalogo-" + tabId);
         const agrupados = agruparPorGenero(lista.filter(p => p.Marca === marca));
         containerMarca.innerHTML = gerarHTMLCategorias(agrupados);
