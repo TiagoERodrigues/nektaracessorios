@@ -57,6 +57,52 @@
       display: inline-block;
       margin-top: 5px;
     }
+
+    /* Header de categorias */
+    .categorias-header {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .categorias-header h5 {
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .categorias-lista {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      max-height: 140px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .categorias-lista button {
+      border: none;
+      background: #f1f3f5;
+      color: #333;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .categorias-lista button:hover {
+      background: #0d6efd;
+      color: #fff;
+    }
+
+    .categorias-lista button.active {
+      background: #0d6efd;
+      color: #fff;
+      font-weight: 600;
+    }
   </style>
 </head>
 
@@ -71,8 +117,11 @@
       </div>
     </div>
 
-    <!-- Abas de marcas -->
-    <ul class="nav nav-tabs mb-4" id="marcasTabs"></ul>
+    <!-- Header de categorias -->
+    <div class="categorias-header">
+      <h5>Filtrar por Marca</h5>
+      <div class="categorias-lista" id="marcasTabs"></div>
+    </div>
 
     <!-- Conteúdo das abas -->
     <div class="tab-content" id="marcasContent"></div>
@@ -118,9 +167,7 @@
 
       // Aba "Todos"
       tabs.innerHTML += `
-        <li class="nav-item">
-          <button class="nav-link active" type="button" data-bs-toggle="tab" data-bs-target="#tab-todos">Todos</button>
-        </li>
+        <button class="active" type="button" data-bs-toggle="tab" data-bs-target="#tab-todos">Todos</button>
       `;
       content.innerHTML += `
         <div class="tab-pane fade show active" id="tab-todos">
@@ -132,9 +179,7 @@
       marcas.forEach(marca => {
         const tabId = "tab-" + marca.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         tabs.innerHTML += `
-          <li class="nav-item">
-            <button class="nav-link" type="button" data-bs-toggle="tab" data-bs-target="#${tabId}">${marca}</button>
-          </li>
+          <button type="button" data-bs-toggle="tab" data-bs-target="#${tabId}">${marca}</button>
         `;
         content.innerHTML += `
           <div class="tab-pane fade" id="${tabId}">
@@ -144,6 +189,14 @@
       });
 
       renderizarPerfumes(lista);
+
+      // Ativa clique nos botões para trocar de aba
+      document.querySelectorAll('.categorias-lista button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.categorias-lista button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+        });
+      });
     }
 
     // Renderiza perfumes
@@ -239,18 +292,5 @@
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // ✅ Garante que abas funcionem com 1 clique
-    document.addEventListener("DOMContentLoaded", () => {
-      const triggerTabList = [].slice.call(document.querySelectorAll('#marcasTabs button'))
-      triggerTabList.forEach(triggerEl => {
-        const tabTrigger = new bootstrap.Tab(triggerEl)
-        triggerEl.addEventListener('click', event => {
-          event.preventDefault()
-          tabTrigger.show()
-        })
-      })
-    })
-  </script>
 </body>
 </html>
