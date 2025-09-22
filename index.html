@@ -80,66 +80,56 @@
       }
     }
 
-    /* ===== CARDS ===== */
-    .card {
-      background: #1a1a1a;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px #00c3ff, 0 0 30px #7b2ff7;
-    }
-
-    .card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-    }
-
-    .card-body {
-      padding: 1rem;
-    }
-
-    .card-body h5 {
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-      color: #fff;
-    }
-
-    .card-body p {
-      font-size: 0.9rem;
-      color: #ccc;
-      margin-bottom: 0.5rem;
-    }
-
-    .badge-opcoes {
-      display: inline-block;
-      background: #222;
-      color: #00c3ff;
-      padding: 0.3rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      margin-right: 0.5rem;
-    }
-
-    .badge-what {
-      display: inline-block;
-      background: linear-gradient(90deg, #00c3ff, #7b2ff7);
-      color: #fff;
-      padding: 0.3rem 0.6rem;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-
-    .badge-what:hover {
-      opacity: 0.9;
-    }
+   /* ===== CARDS ===== */
+  .card {
+    background: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00c3ff, 0 0 30px #7b2ff7;
+  }
+  
+  .card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+  
+  /* 🔥 INVERTENDO O CARD-BODY */
+  .card-body {
+    background: #fff;      /* fundo branco */
+    color: #000;           /* texto preto */
+    padding: 1rem;
+  }
+  
+  .card-body h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+    color: #000;           /* título preto */
+  }
+  
+  .card-body p {
+    font-size: 0.9rem;
+    color: #333;           /* descrição em cinza escuro */
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Ajustando badges dentro do card branco */
+  .badge-opcoes {
+    background: #f2f2f2;
+    color: #00c3ff;
+    border: 1px solid #00c3ff;
+  }
+  
+  .badge-what {
+    background: linear-gradient(90deg, #00c3ff, #7b2ff7);
+    color: #fff;
+  }
 
     /* ===== MODAL ESCURO ===== */
     .modal-content {
