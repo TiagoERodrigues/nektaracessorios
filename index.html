@@ -42,18 +42,12 @@
 
     .categorias-lista {
       display: flex;
+      flex-wrap: wrap;
       gap: 0.5rem;
-      overflow-x: auto;
       padding: 0.5rem 0;
-      scrollbar-width: none;
-    }
-
-    .categorias-lista::-webkit-scrollbar {
-      display: none;
     }
 
     .categorias-lista button {
-      flex: 0 0 auto;
       background: transparent;
       border: 1px solid #00c3ff;
       color: #00c3ff;
@@ -71,6 +65,19 @@
       color: #fff;
       border: none;
       box-shadow: 0 0 10px #00c3ff, 0 0 20px #7b2ff7;
+    }
+
+    /* Mobile - categorias em carrossel */
+    @media (max-width: 768px) {
+      .categorias-lista {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .categorias-lista::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     /* ===== CARDS ===== */
@@ -134,6 +141,31 @@
       opacity: 0.9;
     }
 
+    /* ===== MODAL ESCURO ===== */
+    .modal-content {
+      background: #1a1a1a;
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-header,
+    .modal-footer {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-title {
+      color: #fff;
+    }
+
+    .modal-footer .btn-primary {
+      background: linear-gradient(90deg, #00c3ff, #7b2ff7);
+      border: none;
+    }
+
+    .modal-footer .btn-primary:hover {
+      opacity: 0.9;
+    }
+
     /* ===== RESPONSIVIDADE ===== */
     @media (max-width: 768px) {
       header h1 {
@@ -189,7 +221,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">Outras opções disponíveis</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           Consulte variações como <strong>30ml, 50ml, 100ml</strong> (pode variar conforme disponibilidade).
