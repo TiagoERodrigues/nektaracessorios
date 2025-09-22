@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Perfumes</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+  <style>
     /* ===== RESET ===== */
     * {
       margin: 0;
@@ -25,7 +25,7 @@
     header {
       padding: 1rem;
       text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     header h1 {
@@ -54,7 +54,8 @@
       transition: 0.3s;
     }
 
-    nav button:hover, nav button.active {
+    nav button:hover,
+    nav button.active {
       background: linear-gradient(90deg, #00c3ff, #7b2ff7);
       color: #fff;
       border: none;
@@ -72,7 +73,7 @@
     /* ===== CARD ===== */
     .card {
       background: #1a1a1a;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       overflow: hidden;
       transition: 0.3s;
@@ -93,7 +94,7 @@
       padding: 1rem;
     }
 
-    .card-body h3 {
+    .card-body h5 {
       font-size: 1.1rem;
       margin-bottom: 0.3rem;
       color: #fff;
@@ -117,9 +118,11 @@
       header h1 {
         font-size: 1.5rem;
       }
+
       nav {
         gap: 0.3rem;
       }
+
       nav button {
         padding: 0.4rem 0.8rem;
         font-size: 0.9rem;
@@ -129,33 +132,34 @@
 </head>
 
 <body>
-  <div class="container py-5">
-    <h1 class="text-center mb-4">Catálogo de Perfumes</h1>
+  <header>
+    <h1>Catálogo de Perfumes</h1>
+  </header>
 
-    <!-- Campo de busca -->
-    <div class="row mb-4">
+  <!-- Busca -->
+  <div class="container my-4">
+    <div class="row">
       <div class="col-md-6 mx-auto">
         <input type="text" id="search" class="form-control" placeholder="🔍 Buscar perfume ou marca...">
       </div>
     </div>
+  </div>
 
-    <!-- Header de categorias -->
-    <div class="categorias-header">
-      <h5>Filtrar por Marca</h5>
-      <div class="categorias-lista" id="marcasTabs"></div>
-    </div>
+  <!-- Abas de marcas -->
+  <nav id="marcasTabs"></nav>
 
-    <!-- Conteúdo das abas -->
+  <!-- Conteúdo -->
+  <div class="container">
     <div class="tab-content" id="marcasContent"></div>
   </div>
 
-  <!-- Modal para detalhes -->
+  <!-- Modal -->
   <div class="modal fade" id="modalOpcoes" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
+      <div class="modal-content bg-dark text-light">
         <div class="modal-header">
           <h5 class="modal-title">Outras opções disponíveis</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
           Consulte variações como <strong>30ml, 50ml, 100ml</strong> (pode variar conforme disponibilidade).
@@ -178,7 +182,6 @@
       "UNI": "Unissex"
     };
 
-    // Renderiza abas de marcas
     function renderizarMarcas(lista) {
       const marcas = [...new Set(lista.map(p => p.Marca))].sort();
       const tabs = document.getElementById("marcasTabs");
@@ -188,45 +191,28 @@
       content.innerHTML = "";
 
       // Aba "Todos"
-      tabs.innerHTML += `
-        <button class="active" data-tab="tab-todos">Todos</button>
-      `;
-      content.innerHTML += `
-        <div class="tab-pane active" id="tab-todos">
-          <div id="catalogo-todos"></div>
-        </div>
-      `;
+      tabs.innerHTML += `<button class="active" data-tab="tab-todos">Todos</button>`;
+      content.innerHTML += `<div class="tab-pane active" id="tab-todos"><div id="catalogo-todos"></div></div>`;
 
-      // Abas de marcas
+      // Abas por marca
       marcas.forEach(marca => {
         const tabId = "tab-" + marca.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-        tabs.innerHTML += `
-          <button data-tab="${tabId}">${marca}</button>
-        `;
-        content.innerHTML += `
-          <div class="tab-pane" id="${tabId}">
-            <div id="catalogo-${tabId}"></div>
-          </div>
-        `;
+        tabs.innerHTML += `<button data-tab="${tabId}">${marca}</button>`;
+        content.innerHTML += `<div class="tab-pane" id="${tabId}"><div id="catalogo-${tabId}"></div></div>`;
       });
 
       renderizarPerfumes(lista);
 
-      // Controle de cliques
-      document.querySelectorAll('.categorias-lista button').forEach(btn => {
+      document.querySelectorAll('nav button').forEach(btn => {
         btn.addEventListener('click', () => {
-          // resetar botões
-          document.querySelectorAll('.categorias-lista button').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-
-          // resetar conteúdos
           document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
           document.getElementById(btn.dataset.tab).classList.add('active');
         });
       });
     }
 
-    // Renderiza perfumes
     function renderizarPerfumes(lista) {
       document.querySelectorAll('[id^="catalogo-"]').forEach(c => c.innerHTML = "");
 
@@ -237,11 +223,11 @@
         })).filter(g => g.itens.length > 0);
       };
 
-      // Renderiza "Todos"
+      // Todos
       const todosAgrupados = agruparPorGenero(lista);
       document.getElementById("catalogo-todos").innerHTML = gerarHTMLCategorias(todosAgrupados);
 
-      // Renderiza por marca
+      // Por marca
       [...new Set(lista.map(p => p.Marca))].forEach(marca => {
         const tabId = "tab-" + marca.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         const containerMarca = document.getElementById("catalogo-" + tabId);
@@ -250,32 +236,28 @@
       });
     }
 
-    // Gera HTML de categorias
     function gerarHTMLCategorias(agrupados) {
       return agrupados.map(g => `
-        <div class="categoria">
-          <h4 class="mb-3">${g.genero}</h4>
-          <div class="row g-4">
+        <section class="my-4">
+          <h4>${g.genero}</h4>
+          <div class="grid">
             ${g.itens.map(p => `
-              <div class="col-md-4 col-lg-3">
-                <div class="card h-100" onclick="abrirOpcoes('${p.Perfume}')">
-                  <img src="${p.Imagem}" class="card-img-top" alt="${p.Perfume}">
-                  <div class="card-body">
-                    <h5 class="card-title">${p.Perfume}</h5>
-                    <p class="card-text"><strong>Marca:</strong> ${p.Marca}</p>
-                    <p class="card-text">${p.Tipo} ${p.ml} a partir de <strong>${p.Venda}</strong> à vista</p>
-                    <span class="badge-opcoes">+ opções</span>
-                    <a href="https://wa.me/5537998195214?text=Olá!%20Tenho%20interesse%20no%20perfume%20${encodeURIComponent(p.Marca)}%20${encodeURIComponent(p.Perfume)}." target="_blank" class="badge-what">Quero via WhatsApp</a>
-                  </div>
+              <div class="card" onclick="abrirOpcoes('${p.Perfume}')">
+                <img src="${p.Imagem}" alt="${p.Perfume}">
+                <div class="card-body">
+                  <h5>${p.Perfume}</h5>
+                  <p><strong>Marca:</strong> ${p.Marca}</p>
+                  <p>${p.Tipo} ${p.ml} a partir de <span class="price">${p.Venda}</span></p>
+                  <a href="https://wa.me/5537998195214?text=Olá!%20Tenho%20interesse%20no%20perfume%20${encodeURIComponent(p.Marca)}%20${encodeURIComponent(p.Perfume)}." 
+                     target="_blank" class="btn btn-sm btn-outline-info w-100 mt-2">Comprar via WhatsApp</a>
                 </div>
               </div>
             `).join("")}
           </div>
-        </div>
+        </section>
       `).join("");
     }
 
-    // Modal
     function abrirOpcoes(nomePerfume) {
       const modal = new bootstrap.Modal(document.getElementById("modalOpcoes"));
       document.querySelector("#modalOpcoes .modal-title").innerText = nomePerfume + " – outras opções";
@@ -296,16 +278,12 @@
           if (typeof perfumesBackup !== "undefined") {
             perfumes = perfumesBackup;
             renderizarMarcas(perfumes);
-          } else {
-            console.error("perfumesBackup não está definido no JS de fallback");
           }
         };
-        script.onerror = () => console.error("Não foi possível carregar o arquivo JS de fallback");
         document.body.appendChild(script);
       }
     }
 
-    // Busca
     document.getElementById("search").addEventListener("input", e => {
       const termo = e.target.value.toLowerCase();
       const filtrados = perfumes.filter(p =>
