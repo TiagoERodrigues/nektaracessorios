@@ -295,10 +295,10 @@
                 <div class="card h-100" onclick="abrirOpcoes('${p.Perfume}')">
                   <img src="${p.Imagem}" alt="${p.Perfume}">
                   <div class="card-body">
-                    <h5>${p.Perfume}</h5>
+                    <h5>${p.Perfume} - ${p.ml}</h5>
                     <p><strong>Marca:</strong> ${p.Marca}</p>
-                    <p>${p.Tipo} ${p.ml} a partir de <strong>${p.Venda}</strong></p>
-                    <p>OBS: ${p.OBS}</p>
+                    <p><strong>${p.Venda}</strong></p>
+                    <p>${p.OBS ? `<p>OBS: ${p.OBS}</p>` : ""}</p>
                     <p>* Valor sujeito a alteração</p>
                     <a href="https://wa.me/5537998195214?text=Olá!%20Tenho%20interesse%20no%20perfume%20${encodeURIComponent(p.Marca)}%20${encodeURIComponent(p.Perfume)}." target="_blank" class="badge-what">WhatsApp</a>
                   </div>
